@@ -1,8 +1,25 @@
 import { GlobeAltIcon, MenuIcon, SearchIcon, UserCircleIcon, UsersIcon } from '@heroicons/react/solid';
 import Image from 'next/image';
-import React from 'react';
+import React, { useState } from 'react';
+import { DateRangePicker } from 'react-date-range';
+import 'react-date-range/dist/styles.css'; // main style file
+import 'react-date-range/dist/theme/default.css'; // theme css file
 
 const Header = () => {
+    const [searchInput, setSearchInput] = useState(new Date())
+    const [startDate, setStartDate] = useState(new Date())
+    const [endDate, setEndDate] = useState(new Date())
+    const selectionRange = {
+        startDate: startDate,
+        endDate: endDate,
+        key: 'selection'
+    }
+    const handleSelect = (ranges) => {
+        // selection is the key from selection range
+        setStartDate(ranges.selection.startDate)
+        setEndDate(ranges.selection.endDate)
+    }
+
     return (
         <header className='sticky top-0 z-50 grid grid-cols-3 bg-white shadow-md py-5 px-5 md:px-10' >
             <div className='relative flex items-center h-10 cursor-pointer my-auto'>
@@ -14,7 +31,12 @@ const Header = () => {
                 alt="" />
             </div>
             <div className='flex items-center md:border-2 rounded-full py-2 md:shadow-sm'>
-                <input type="text" placeholder='start your search' className='pl-5 bg-transparent outline-none flex-grow text-sm text-gray-600 placeholder-gray-400' />
+                <input type="text" placeholder='start your search'
+                 className=
+                'pl-5 bg-transparent outline-none flex-grow text-sm text-gray-600 placeholder-gray-400'
+                value={searchInput}
+                onChange={(event)=>setSearchInput(event.target.value)}
+                />
                 <SearchIcon className=' hidden md:inline-flex h-8 bg-red-400 text-white rounded-full p-2 cursor-pointer md:mx-2'/>
             </div>
             <div className='flex space-x-4 items-center justify-end text-gray-500'>
@@ -26,6 +48,20 @@ const Header = () => {
                 </div>
                 <UsersIcon  className='h-6'/>
             </div>
+            {
+                searchInput && (
+                <div>
+                    <DateRangePicker 
+                    //ranges is the initial value to put to make it works
+                    ranges={[selectionRange]}
+                    // we can't buy beforre today
+                    minDate={new Date()}
+                    // to change the range color
+                    rangeColors={['#FD5B61']}
+                    onChange={handleSelect}
+                    />
+                </div>
+                )}
         </header>
     )
 }
