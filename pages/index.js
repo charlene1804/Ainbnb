@@ -3,7 +3,7 @@ import Banner from '../components/Banner';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import LargeCard from '../components/LargeCard';
-import Mediumcard from '../components/Mediumcard';
+import MediumCard from '../components/MediumCard';
 import Smallcard from '../components/Smallcard';
 
 export default function Home({exploreData, cardsData}) {
@@ -38,7 +38,7 @@ export default function Home({exploreData, cardsData}) {
           <div className='flex space-x-3 overflow-scroll scrollbar-hide p-3 -ml-3'>
               {
                   cardsData?.map((item, index)=>(
-                        <Mediumcard
+                        <MediumCard
                         img = {item.img}
                         title = {item.title}
                         key={index}
