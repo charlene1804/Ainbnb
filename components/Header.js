@@ -1,15 +1,17 @@
 import { GlobeAltIcon, MenuIcon, SearchIcon, UserCircleIcon, UsersIcon } from '@heroicons/react/solid';
+import { useRouter } from 'next/dist/client/router';
 import Image from 'next/image';
 import React, { useState } from 'react';
 import { DateRangePicker } from 'react-date-range';
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
-
 const Header = () => {
-    const [searchInput, setSearchInput] = useState(new Date())
-    const [startDate, setStartDate] = useState(new Date())
-    const [endDate, setEndDate] = useState(new Date())
-    const [numberOfGuest, setNumberOfGuest] = useState(1)
+    const router = useRouter();
+
+    const [searchInput, setSearchInput] = useState(new Date());
+    const [startDate, setStartDate] = useState(new Date());
+    const [endDate, setEndDate] = useState(new Date());
+    const [numberOfGuest, setNumberOfGuest] = useState(1);
     const selectionRange = {
         startDate: startDate,
         endDate: endDate,
@@ -20,10 +22,13 @@ const Header = () => {
         setStartDate(ranges.selection.startDate)
         setEndDate(ranges.selection.endDate)
     }
+    const search = () => {
+        router.push('search')
+    }
 
     return (
         <header className='sticky top-0 z-50 grid grid-cols-3 bg-white shadow-md py-5 px-5 md:px-10' >
-            <div className='relative flex items-center h-10 cursor-pointer my-auto'>
+            <div onClick={()=>router.push('/')} className='relative flex items-center h-10 cursor-pointer my-auto'>
                 {/* using imge from next js which optimize the image, we need to config a file to configurate the image(cf:next.config) */}
                 <Image src="https://links.papareact.com/qd3"
                 layout='fill'
@@ -35,6 +40,7 @@ const Header = () => {
                 <input type="text" placeholder='start your search'
                  className=
                 'pl-5 bg-transparent outline-none flex-grow text-sm text-gray-600 placeholder-gray-400'
+                // we put the value from the event in the state and take the value as the input value
                 value={searchInput}
                 onChange={(event)=>setSearchInput(event.target.value)}
                 />
@@ -68,12 +74,14 @@ const Header = () => {
                         value={numberOfGuest}
                         // put a min or max to provide min value or max value
                         min={1}
+                        // putting the number in the state
                         onChange={(event) => setNumberOfGuest(event.target.value)}
                         />
                     </div>
                     <div className='flex'>
+                        {/* onClick we wanna hide the calendar removing the input field from the useState */}
                         <button className='flex-grow text-gray-500' onClick={()=>setSearchInput('')}> Cancel</button>
-                        <button className='flex-grow text-red-500'> Search</button>
+                        <button onClick={search} className='flex-grow text-red-500'> Search</button>
                     </div>
                 </div>
                 )}
