@@ -5,25 +5,37 @@ import React, { useState } from 'react';
 import { DateRangePicker } from 'react-date-range';
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
-const Header = () => {
+const Header = ({placeholder}) => {
     const router = useRouter();
 
     const [searchInput, setSearchInput] = useState(new Date());
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
     const [numberOfGuest, setNumberOfGuest] = useState(1);
+    // Select parameter for the calendar
     const selectionRange = {
         startDate: startDate,
         endDate: endDate,
         key: 'selection'
     }
+    //function to put into the state users date
     const handleSelect = (ranges) => {
         // selection is the key from selection range
         setStartDate(ranges.selection.startDate)
         setEndDate(ranges.selection.endDate)
     }
+    // on click we go to the search page WITH the query ( seems as props, to pass information through the new component)
     const search = () => {
-        router.push('search')
+        router.push({
+            pathname:'/search',
+            query: {
+                location: searchInput,
+                // toISOString allows us to put a string into the url
+                startDate: startDate.toISOString(),
+                endDate: endDate.toISOString(),
+                numberOfGuest,
+            }
+        })
     }
 
     return (
@@ -37,7 +49,7 @@ const Header = () => {
                 alt="" />
             </div>
             <div className='flex items-center md:border-2 rounded-full py-2 md:shadow-sm'>
-                <input type="text" placeholder='start your search'
+                <input type="text" placeholder= {placeholder || 'start your search'}
                  className=
                 'pl-5 bg-transparent outline-none flex-grow text-sm text-gray-600 placeholder-gray-400'
                 // we put the value from the event in the state and take the value as the input value
