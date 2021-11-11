@@ -4,6 +4,7 @@ import React from 'react';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import InfoCard from '../components/InfoCard';
+import Map from '../components/Map';
 const Search = ({searchResult}) => {
     console.log(searchResult)
     // to get the information from the url we use the router.query
@@ -19,8 +20,8 @@ const Search = ({searchResult}) => {
             placeholder={`${location} | ${ranged} | ${numberOfGuest} Guests`}
             />
 
-            <main className='flex'>
-                <section className='flex-grow pt-14 px-4'>
+            <main className='flex justify-center'>
+                <section className='flex-grow pt-14 px-4 max-w-7xl '>
                     <p className='text-xs'>300+ Stays - {ranged} - for {numberOfGuest} guests</p>
                     <h1 className='text-3xl font-semibold mt-2 mb-6'>stay in {location}</h1>
                 
@@ -49,6 +50,11 @@ const Search = ({searchResult}) => {
                 }
                 </div>
                
+                </section>
+                <section className='hidden xl:inline-flex xl:min-w-[600px]'>
+                    <Map 
+                    // className='hidden xl:inline-flex' 
+                    />
                 </section>
             </main>
 
