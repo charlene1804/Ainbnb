@@ -59,7 +59,7 @@ export default function Home({exploreData, cardsData}) {
     </div>
   )
 }
-// static rendering, this only works on pages! this happen on the server !
+// static rendering, this only works on pages! this happen on the server !, tis page is loading once
 export async function getStaticProps() {
   //request to the server
   const exploreData = await fetch('https://links.papareact.com/pyp')

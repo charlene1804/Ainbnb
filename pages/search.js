@@ -3,7 +3,9 @@ import { useRouter } from 'next/dist/client/router';
 import React from 'react';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
-const Search = () => {
+import InfoCard from '../components/InfoCard';
+const Search = ({searchResult}) => {
+    console.log(searchResult)
     // to get the information from the url we use the router.query
     const router = useRouter()
     const {location, startDate, endDate, numberOfGuest} = router.query
@@ -18,7 +20,7 @@ const Search = () => {
             />
 
             <main className='flex'>
-                <section className='flex-grow pt-14 px-x'>
+                <section className='flex-grow pt-14 px-4'>
                     <p className='text-xs'>300+ Stays - {ranged} - for {numberOfGuest} guests</p>
                     <h1 className='text-3xl font-semibold mt-2 mb-6'>stay in {location}</h1>
                 
@@ -30,7 +32,22 @@ const Search = () => {
                     <p className='button'>Rooms and beds</p>
                     <p className='button'>More filters</p>
                 </div>
-                
+                <div className='flex'>
+                     {
+                    searchResult.map(({img, location, title,description, price, total})=>(
+                        <InfoCard 
+                        key={img}
+                        img={img}
+                        location={location}
+                        title={title}
+                        description={description}
+                        price={price}
+                        total={total}
+                        />
+                    ))
+                }
+                </div>
+               
                 </section>
             </main>
 
@@ -40,3 +57,16 @@ const Search = () => {
 }
 
 export default Search
+
+// we use getServerSide props => everytime we go to the search page, we build the page
+// we can pass an argument to this fucion => context to pass router props into it
+export async function getServerSideProps() {
+    const searchResult = await fetch('https://links.papareact.com/isz')
+    .then(response => response.json())
+
+    return {
+        props: {
+            searchResult,
+        }
+    }
+}
