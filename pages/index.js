@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Fade from 'react-reveal/Fade';
 import Banner from '../components/Banner';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
@@ -17,6 +18,7 @@ export default function Home({exploreData, cardsData}) {
       <Header />
       <Banner />
       <main className='max-w-7xl mx-auto p-x-8 sm:px-16'>
+          <Fade left>
         <section className='pt-6'>
           <h2 className='text-4xl font-semibold pb-5'>Explore Nearby</h2>
           {/* pull data from a server - API endpoint Static rendering: using when the information don't change */}
@@ -33,6 +35,8 @@ export default function Home({exploreData, cardsData}) {
               }
           </div>
         </section>
+          </Fade>
+          <Fade right>
         <section>
           <h2 className='text-4xl font-semibold py-8'>Live Anywhere</h2>
           <div className='flex space-x-3 overflow-scroll scrollbar-hide p-3 -ml-3'>
@@ -48,12 +52,15 @@ export default function Home({exploreData, cardsData}) {
                 }
               </div>
         </section>
+        </Fade>
+        <Fade left>
         <LargeCard 
           img='https://links.papareact.com/4cj'
           title='The Greatest Outdoors'
           description='Wishlist curated by Ainbnb'
           buttonText='Get inspired'
         />
+      </Fade>
       </main>
         <Footer />
     </div>

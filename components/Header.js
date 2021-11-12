@@ -8,7 +8,7 @@ import 'react-date-range/dist/theme/default.css'; // theme css file
 const Header = ({placeholder}) => {
     const router = useRouter();
 
-    const [searchInput, setSearchInput] = useState(new Date());
+    const [searchInput, setSearchInput] = useState('');
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
     const [numberOfGuest, setNumberOfGuest] = useState(1);
@@ -60,7 +60,7 @@ const Header = ({placeholder}) => {
             </div>
             <div className='flex space-x-4 items-center justify-end text-gray-500'>
                 <p className='hidden md:inline cursor-pointer'>because a host</p>
-                    <GlobeAltIcon className='h-6 cursor-pointer' />
+                    <GlobeAltIcon className='h-6 cursor-pointer animate-spin' />
                 <div className='flex items-center space-x-2 border-2 p-2 rounded-full'>
                     <MenuIcon  className='h-6'/>
                     <UserCircleIcon  className='h-6'/>
@@ -69,7 +69,7 @@ const Header = ({placeholder}) => {
             </div>
             {
                 searchInput && (
-                <div className='flex flex-col col-span-3 mx-auto'>
+                <div className='flex flex-col col-span-3 mx-auto py-4'>
                     <DateRangePicker 
                     //ranges is the initial value to put to make it works
                     ranges={[selectionRange]}
@@ -92,8 +92,8 @@ const Header = ({placeholder}) => {
                     </div>
                     <div className='flex'>
                         {/* onClick we wanna hide the calendar removing the input field from the useState */}
-                        <button className='flex-grow text-gray-500' onClick={()=>setSearchInput('')}> Cancel</button>
-                        <button onClick={search} className='flex-grow text-red-500'> Search</button>
+                        <button className='flex-grow text-gray-500 hover:bg-red-400 hover:text-white hover:rounded-lg' onClick={()=>setSearchInput('')}> Cancel</button>
+                        <button onClick={search} className='flex-grow text-red-500 hover:bg-red-400 hover:text-white hover:rounded-lg'> Search</button>
                     </div>
                 </div>
                 )}

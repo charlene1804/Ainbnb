@@ -1,6 +1,7 @@
 import { format } from 'date-fns';
 import { useRouter } from 'next/dist/client/router';
 import React from 'react';
+import Fade from 'react-reveal/Fade';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import InfoCard from '../components/InfoCard';
@@ -33,6 +34,7 @@ const Search = ({searchResult}) => {
                     <p className='button'>Rooms and beds</p>
                     <p className='button'>More filters</p>
                 </div>
+                <Fade left>
                 <div className='flex flex-col'>
                      {
                     searchResult.map(({img, location, title,description, price, total, star})=>(
@@ -49,12 +51,12 @@ const Search = ({searchResult}) => {
                     ))
                 }
                 </div>
-               
+                </Fade>
                 </section>
-                <section className='hidden xl:inline-flex xl:min-w-[600px]'>
+                <section className='hidden xl:inline-flex xl:w-[600px] 2xl:w-[800px] w-full'>
                     <Map 
                     searchResult={searchResult}
-                    // className='hidden xl:inline-flex' 
+                    className='w-full' 
                     />
                 </section>
             </main>
