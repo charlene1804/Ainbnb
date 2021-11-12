@@ -4,8 +4,8 @@ import Image from 'next/image';
 import React from 'react';
 const InfoCard = ({img, location, title, description, star, price, total}) => {
     return (
-        <div className='flex py-7 px-2 border-b cursor-pointer hover:opacity-80 hover:shadow-lg transition duration-200 ease-out first:border-t'>
-            <div className='relative h-24 w-40 md:h-52 md:w-80 flex-shrink-0'>
+        <div className='flex flex-col py-7 px-2 border-b cursor-pointer hover:opacity-80 hover:shadow-lg transition duration-200 ease-out first:border-t sm:flex-row'>
+            <div className='relative h-96 w-full sm:h-48 sm:w-72 md:h-52 md:w-80 flex-shrink-0 '>
                 <Image src={img} layout='fill' objectFit='cover' className='rounded-lg' />
             </div>
             <div className='flex flex-col flex-grow pl-5'>
