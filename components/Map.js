@@ -1,15 +1,17 @@
 import getCenter from 'geolib/es/getCenter';
 import React, { useState } from 'react';
-import ReactMapGL, { Marker, Popup } from 'react-map-gl';
+import ReactMapGL, { Marker, Popup }
+    // ,{ Marker, Popup } 
+    from 'react-map-gl';
 
 const Map = ({searchResult}) => {
 
     const [selectedLocation, setSelectedLocation] = useState({})
-
+console.log('selectedLocation', selectedLocation)
       // transform searchResult object into another one {latitude:, longitude} object
-    const coordinates = searchResult.map(item => ({
-        longitude: item.long,
-        latitude: item.lat,
+    const coordinates = searchResult.searchResult.map(item => ({
+        longitude: parseFloat(item.long),
+        latitude: parseFloat(item.lat),
         })
     )
    
@@ -27,6 +29,7 @@ const Map = ({searchResult}) => {
     });
 
     return (
+          
         <ReactMapGL
         {...viewport}
         onViewportChange={(viewport) => setViewport(viewport)}
@@ -35,24 +38,30 @@ const Map = ({searchResult}) => {
         onViewportChange={(nextViewport) => setViewport(nextViewport)}
         >
         {
-            searchResult.map(result=>(
-                <div key={result.long}>
-                        <Marker
-                        longitude={result.long}
-                        latitude={result.lat}
+            searchResult.searchResult.map(result=>(
+              
+                <div key={result.id}>
+                    {console.log('long', result.long, 'lat', result.lat)}
+                    
+                <Marker
+                        longitude={parseFloat(result.long)}
+                        latitude={parseFloat(result.lat)}
                         offsetLeft={-20}
                         offsettop={-10}
                     >
                     <p onClick={()=>setSelectedLocation(result)} className='cursor-pointer text-xl animate-bounce' aria-label='push-pin'>📌</p>
-                    {/* //if we click on the marker, we wanna show a pop up */}
-  
-                    {selectedLocation.long === result.long ? (
+                    {
+                    parseFloat(selectedLocation.long) === parseFloat(result.long) 
+                    ? (
 
+                        console.log(parseFloat(selectedLocation.long)),
+
+                        console.log(parseFloat(result.long)),
                         <Popup 
                         onClose={() => setSelectedLocation({})}
                         closeOnClick={true} 
-                        latitude={result.lat}
-                        longitude={result.long}
+                        latitude={parseFloat(result.lat)}
+                        longitude={parseFloat(result.long)}
                         className='w-72'
                         >
                         {result.title}
@@ -64,9 +73,10 @@ const Map = ({searchResult}) => {
                     }
                     </Marker>
                 </div>
-            ))
+            ))  
         }
         </ReactMapGL>
+
     )
 }
 

@@ -2,7 +2,7 @@ import { HeartIcon } from '@heroicons/react/outline';
 import { StarIcon } from '@heroicons/react/solid';
 import Image from 'next/image';
 import React from 'react';
-const InfoCard = ({img, location, title, description, star, price, total}) => {
+const InfoCard = ({img, location, title, description, star, price, total, details}) => {
     return (
         <div className='flex flex-col py-7 px-2 border-b cursor-pointer hover:opacity-80 hover:shadow-lg transition duration-200 ease-out first:border-t sm:flex-row'>
             <div className='relative h-96 w-full sm:h-48 sm:w-72 md:h-52 md:w-80 flex-shrink-0 '>
@@ -10,7 +10,7 @@ const InfoCard = ({img, location, title, description, star, price, total}) => {
             </div>
             <div className='flex flex-col flex-grow pl-5'>
                 <div className='flex justify-between'>
-                    <p>{location}</p>
+                    <p>{details} {location}</p>
                     <HeartIcon className='cursor-pointer h-7' />
                 </div>
                 <h4 className='text-xl'>{title}</h4>
@@ -22,8 +22,8 @@ const InfoCard = ({img, location, title, description, star, price, total}) => {
                         {star}
                     </p>
                     <div>
-                        <p className='text-lg font-semibold pb-2 lg:text-2xl'>{price}</p>
-                        <p className='text-right font-extralight'>{total}</p>
+                        <p className='text-lg font-semibold pb-2 lg:text-2xl'>$ {price} / night</p>
+                        <p className='text-right font-extralight'>$ {total}</p>
                     </div>
                 </div>
             </div>

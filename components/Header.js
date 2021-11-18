@@ -92,8 +92,8 @@ const Header = ({placeholder}) => {
                     </div>
                     <div className='flex'>
                         {/* onClick we wanna hide the calendar removing the input field from the useState */}
-                        <button className='flex-grow text-gray-500 hover:bg-red-400 hover:text-white hover:rounded-lg' onClick={()=>setSearchInput('')}> Cancel</button>
-                        <button onClick={search} className='flex-grow text-red-500 hover:bg-red-400 hover:text-white hover:rounded-lg'> Search</button>
+                        <button className='flex-grow text-gray-500 hover:bg-red-400 rounded-lg py-1 hover:text-white hover:rounded-lg transition duration-300 ease-out' onClick={()=>setSearchInput('')}> Cancel</button>
+                        <button onClick={search} className='flex-grow text-red-500 rounded-lg hover:bg-red-400 py-1 hover:text-white hover:rounded-lg transition duration-300 ease-out'> Search</button>
                     </div>
                 </div>
                 )}

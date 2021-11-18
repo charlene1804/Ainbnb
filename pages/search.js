@@ -7,7 +7,7 @@ import Header from '../components/Header';
 import InfoCard from '../components/InfoCard';
 import Map from '../components/Map';
 const Search = ({searchResult}) => {
- 
+  console.log('searchResult dans le composant avec les données', searchResult)
     // to get the information from the url we use the router.query
     const router = useRouter()
     const {location, startDate, endDate, numberOfGuest} = router.query
@@ -37,7 +37,8 @@ const Search = ({searchResult}) => {
                 <Fade left>
                 <div className='flex flex-col'>
                      {
-                    searchResult.map(({img, location, title,description, price, total, star})=>(
+                    searchResult.searchResult.map(({img, location, title,description, price, total, star, details})=>(
+                        console.log(img),
                         <InfoCard 
                         key={img}
                         img={img}
@@ -47,6 +48,7 @@ const Search = ({searchResult}) => {
                         price={price}
                         total={total}
                         star={star}
+                        details={details}
                         />
                     ))
                 }
@@ -70,10 +72,19 @@ export default Search
 
 // we use getServerSide props => everytime we go to the search page, we build the page
 // we can pass an argument to this fucion => context to pass router props into it
-export async function getServerSideProps() {
-    const searchResult = await fetch('https://links.papareact.com/isz')
-    .then(response => response.json())
+export async function getServerSideProps(context) {
+    // const searchResult = await fetch('https://links.papareact.com/isz')
+    // .then(response => response.json())
 
+    // return {
+    //     props: {
+    //         searchResult,
+    //     }
+    // }
+    const res = await fetch('http://localhost:3001/accommodation')
+    const searchResult = await res.json()
+    // .then(response => response.json())
+    console.log(searchResult)
     return {
         props: {
             searchResult,
