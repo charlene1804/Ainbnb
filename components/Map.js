@@ -4,11 +4,11 @@ import ReactMapGL, { Marker, Popup }
     // ,{ Marker, Popup } 
     from 'react-map-gl';
 
-const Map = ({searchResult}) => {
+const Map = ({currentPosts}) => {
 
     const [selectedLocation, setSelectedLocation] = useState({})
       // transform searchResult object into another one {latitude:, longitude} object
-    const coordinates = searchResult.searchResult.map(item => ({
+    const coordinates = currentPosts.map(item => ({
         longitude: parseFloat(item.long),
         latitude: parseFloat(item.lat),
         })
@@ -37,7 +37,7 @@ const Map = ({searchResult}) => {
         onViewportChange={(nextViewport) => setViewport(nextViewport)}
         >
         {
-            searchResult.searchResult.map(result=>( 
+            currentPosts.map(result=>( 
                 <div key={result.id}>         
                 <Marker
                         longitude={parseFloat(result.long)}
@@ -45,7 +45,7 @@ const Map = ({searchResult}) => {
                         offsetLeft={-20}
                         offsettop={-10}
                     >
-                    <p onClick={()=>setSelectedLocation(result)} className='cursor-pointer text-xl animate-bounce' aria-label='push-pin'>📌</p>
+                    <p onClick={()=>setSelectedLocation(result)} className='cursor-pointer font-bold animate-bounce py-1 px-2 bg-white rounded-full' aria-label='push-pin'>{result.price}$</p>
                     {
                     parseFloat(selectedLocation.long) === parseFloat(result.long) 
                     ? (

@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
+const Pagination = ({ postsPerPage, totalPosts, paginate, indexOfFirstPost, indexOfLastPost }) => {
   const pageNumbers = [];
 
   for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
@@ -9,7 +9,7 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
   }
 
   return (
-    <nav className=''>
+    <nav className='flex flex-col items-center w-full '>
       <ul className='flex justify-center '>
         {pageNumbers.map((number, index) => (
           <li key={number} className='mx-1'>
@@ -20,6 +20,7 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
           </li>
         ))}
       </ul>
+      <p className='text-gray-400 text-sm py-1'>{indexOfFirstPost +1 } - {indexOfLastPost} of {totalPosts} to stay </p>
     </nav>
   );
 };

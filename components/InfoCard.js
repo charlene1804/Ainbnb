@@ -23,7 +23,7 @@ const InfoCard = ({img, location, title, description, star, price, total, detail
                     </p>
                     <div>
                         <p className='text-lg font-semibold pb-2 lg:text-2xl'>$ {price} / night</p>
-                        <p className='text-right font-extralight'>$ {total}</p>
+                        <p className='text-right font-extralight underline'>$ {total} total</p>
                     </div>
                 </div>
             </div>
