@@ -1,13 +1,25 @@
 import { format } from 'date-fns';
 import { useRouter } from 'next/dist/client/router';
-import React from 'react';
+import React, { useState } from 'react';
 import Fade from 'react-reveal/Fade';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import InfoCard from '../components/InfoCard';
 import Map from '../components/Map';
+import Pagination from '../components/Pagination';
 const Search = ({searchResult}) => {
-  console.log('searchResult dans le composant avec les données', searchResult)
+    const [currentPage, setCurrentPage] = useState(1);
+    const [postsPerPage] = useState(5);
+      // Get current posts
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = searchResult.searchResult.slice(indexOfFirstPost, indexOfLastPost);
+  console.log('currentPosts', currentPosts)
+    // Change page
+    const paginate = pageNumber => setCurrentPage(pageNumber);
+
+    
+  console.log('searchResult dans le composant avec les données', searchResult.searchResult)
     // to get the information from the url we use the router.query
     const router = useRouter()
     const {location, startDate, endDate, numberOfGuest} = router.query
@@ -37,8 +49,7 @@ const Search = ({searchResult}) => {
                 <Fade left>
                 <div className='flex flex-col'>
                      {
-                    searchResult.searchResult.map(({img, location, title,description, price, total, star, details})=>(
-                        console.log(img),
+                    currentPosts.map(({img, location, title,description, price, total, star, details})=>(
                         <InfoCard 
                         key={img}
                         img={img}
@@ -54,6 +65,10 @@ const Search = ({searchResult}) => {
                 }
                 </div>
                 </Fade>
+                    <Pagination  postsPerPage={postsPerPage} 
+                    totalPosts={searchResult.searchResult.length}
+                    paginate={paginate}
+                    />
                 </section>
                 <section className='hidden xl:inline-flex xl:w-[600px] 2xl:w-[800px] w-full'>
                     <Map 

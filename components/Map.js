@@ -7,7 +7,6 @@ import ReactMapGL, { Marker, Popup }
 const Map = ({searchResult}) => {
 
     const [selectedLocation, setSelectedLocation] = useState({})
-console.log('selectedLocation', selectedLocation)
       // transform searchResult object into another one {latitude:, longitude} object
     const coordinates = searchResult.searchResult.map(item => ({
         longitude: parseFloat(item.long),
@@ -38,11 +37,8 @@ console.log('selectedLocation', selectedLocation)
         onViewportChange={(nextViewport) => setViewport(nextViewport)}
         >
         {
-            searchResult.searchResult.map(result=>(
-              
-                <div key={result.id}>
-                    {console.log('long', result.long, 'lat', result.lat)}
-                    
+            searchResult.searchResult.map(result=>( 
+                <div key={result.id}>         
                 <Marker
                         longitude={parseFloat(result.long)}
                         latitude={parseFloat(result.lat)}
@@ -53,10 +49,6 @@ console.log('selectedLocation', selectedLocation)
                     {
                     parseFloat(selectedLocation.long) === parseFloat(result.long) 
                     ? (
-
-                        console.log(parseFloat(selectedLocation.long)),
-
-                        console.log(parseFloat(result.long)),
                         <Popup 
                         onClose={() => setSelectedLocation({})}
                         closeOnClick={true} 
@@ -76,7 +68,6 @@ console.log('selectedLocation', selectedLocation)
             ))  
         }
         </ReactMapGL>
-
     )
 }
 
