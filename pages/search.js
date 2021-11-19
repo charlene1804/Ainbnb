@@ -14,12 +14,9 @@ const Search = ({searchResult}) => {
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = searchResult.searchResult.slice(indexOfFirstPost, indexOfLastPost);
-  console.log('currentPosts', currentPosts)
     // Change page
     const paginate = pageNumber => setCurrentPage(pageNumber);
 
-    
-  console.log('searchResult dans le composant avec les données', searchResult.searchResult)
     // to get the information from the url we use the router.query
     const router = useRouter()
     const {location, startDate, endDate, numberOfGuest} = router.query
@@ -27,6 +24,11 @@ const Search = ({searchResult}) => {
    const formatedStartDate = format(new Date(startDate), "dd MMMM yy")
    const formatedEndDate = format(new Date(endDate), "dd MMMM yy")
    const ranged= `${formatedStartDate} - ${formatedEndDate}`
+   const dayStart = parseInt(format(new Date(formatedStartDate), 'dd'))
+   const dayEnd = parseInt(format(new Date(formatedEndDate), 'dd'))
+   const NightStay = (dayEnd - dayStart)
+
+console.log(NightStay)
     return (
         <div>
             <Header 
@@ -51,6 +53,7 @@ const Search = ({searchResult}) => {
                      {
                     currentPosts.map(({img, location, title,description, price, total, star, details})=>(
                         <InfoCard 
+                        NightStay={NightStay}
                         key={img}
                         img={img}
                         location={location}

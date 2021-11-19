@@ -1,9 +1,9 @@
 import getCenter from 'geolib/es/getCenter';
+import 'mapbox-gl/dist/mapbox-gl.css';
 import React, { useState } from 'react';
 import ReactMapGL, { Marker, Popup }
     // ,{ Marker, Popup } 
     from 'react-map-gl';
-
 const Map = ({currentPosts}) => {
 
     const [selectedLocation, setSelectedLocation] = useState({})

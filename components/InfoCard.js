@@ -2,7 +2,8 @@ import { HeartIcon } from '@heroicons/react/outline';
 import { StarIcon } from '@heroicons/react/solid';
 import Image from 'next/image';
 import React from 'react';
-const InfoCard = ({img, location, title, description, star, price, total, details}) => {
+const InfoCard = ({img, location, title, description, star, price, details, NightStay}) => {
+    let Tot = NightStay* price
     return (
         <div className='flex flex-col py-7 px-2 border-b cursor-pointer hover:opacity-80 hover:shadow-lg transition duration-200 ease-out first:border-t sm:flex-row'>
             <div className='relative h-96 w-full sm:h-48 sm:w-72 md:h-52 md:w-80 flex-shrink-0 '>
@@ -22,8 +23,8 @@ const InfoCard = ({img, location, title, description, star, price, total, detail
                         {star}
                     </p>
                     <div>
-                        <p className='text-lg font-semibold pb-2 lg:text-2xl'>$ {price} / night</p>
-                        <p className='text-right font-extralight underline'>$ {total} total</p>
+                        <p className='text-lg font-semibold pb-2 lg:text-2xl'>${price} / <span className='font-normal'>night</span> </p>
+                        <p className='text-right font-extralight underline'>${Tot} total</p>
                     </div>
                 </div>
             </div>
