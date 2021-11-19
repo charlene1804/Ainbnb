@@ -1,8 +1,9 @@
 //import progress bar from npm librairy
-import ProgressBar from '@badrap/bar-of-progress'
-import Router from 'next/router'
-import 'tailwindcss/tailwind.css'
-import '../styles/global.css'
+import ProgressBar from '@badrap/bar-of-progress';
+import "mapbox-gl/dist/mapbox-gl.css";
+import Router from 'next/router';
+import 'tailwindcss/tailwind.css';
+import '../styles/global.css';
 // initialize progress bar with parameters
 const progress = new ProgressBar({
   size:4,

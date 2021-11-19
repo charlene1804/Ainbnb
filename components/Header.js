@@ -36,6 +36,7 @@ const Header = ({placeholder}) => {
                 numberOfGuest,
             }
         })
+        setSearchInput('')
     }
 
     return (

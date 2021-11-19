@@ -28,7 +28,14 @@ const Search = ({searchResult}) => {
    const dayEnd = parseInt(format(new Date(formatedEndDate), 'dd'))
    const NightStay = (dayEnd - dayStart)
 
-console.log(NightStay)
+        // filter with type
+   const [Type, setType] = useState('type')
+   const filteredType = searchResult.searchResult.filter((item) => Type.toLowerCase() === item.type.toLowerCase())
+   console.log(filteredType)
+        // filter with number of bedroom
+   const [nbBed, setNbBed] = useState('')
+   const filteredBed = searchResult.searchResult.filter((item) => parseInt(nbBed) === item.bedroom)
+    console.log('filteredBed', filteredBed)
     return (
         <div>
             <Header 
@@ -42,11 +49,33 @@ console.log(NightStay)
                 
                 <div className='hidden lg:inline-flex mb-5 space-x-3 text-gray-800 whitespace-nowrap'>
                     {/* utility classname, we create a folder styles, with global, and create a utility classname, the globall.css must be import in _app.js */}
-                    <p className='button '>Cancelation Flexibility</p>
-                    <p className='button'>Type of place</p>
-                    <p className='button'>Price</p>
-                    <p className='button'>Rooms and beds</p>
-                    <p className='button'>More filters</p>
+                    <button className='button '>Cancelation Flexibility</button>
+                    {/* <button className='button'>Type of place</button> */}
+
+                    <select className='button' onChange ={(event) => 
+                        // console.log(event.target.value)}
+                        setType(event.target.value)}
+                        >
+                        <option disabled>type</option>
+                        <option value='room' >room</option>
+                        <option value='Studio' >Studio</option>
+                        tyyyyy
+                    </select>
+                    <button className='button'>Price</button>
+
+                    <select className='button' onChange ={(event) => 
+                        // console.log(event.target.value)}
+                        setNbBed(event.target.value)}
+                        >
+                        <option disabled >bedroom</option>
+                        <option value='1' >1</option>
+                        <option value='2' >2</option>
+                        <option value='3' >3</option>
+                        <option value='4' >4</option>
+                    </select>
+
+                    {/* <button className='button'>Rooms and beds</button> */}
+                    <button className='button'>More filters</button>
                 </div>
                 <Fade left>
                 <div className='flex flex-col'>
