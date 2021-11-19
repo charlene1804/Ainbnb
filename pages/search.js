@@ -31,11 +31,17 @@ const Search = ({searchResult}) => {
         // filter with type
    const [Type, setType] = useState('type')
    const filteredType = searchResult.searchResult.filter((item) => Type.toLowerCase() === item.type.toLowerCase())
-   console.log(filteredType)
+
         // filter with number of bedroom
-   const [nbBed, setNbBed] = useState('')
+   const [nbBed, setNbBed] = useState('bedroom')
    const filteredBed = searchResult.searchResult.filter((item) => parseInt(nbBed) === item.bedroom)
-    console.log('filteredBed', filteredBed)
+
+            // filter with number of bedroom
+   const [priceCost, setPriceCost] = useState('')
+
+   const filteredPrice = searchResult.searchResult.filter((item) => parseInt(priceCost) >= item.price)
+
+
     return (
         <div>
             <Header 
@@ -56,18 +62,23 @@ const Search = ({searchResult}) => {
                         // console.log(event.target.value)}
                         setType(event.target.value)}
                         >
-                        <option disabled>type</option>
+                        <option disabled value='type'>type</option>
                         <option value='room' >room</option>
                         <option value='Studio' >Studio</option>
-                        tyyyyy
+                        
                     </select>
-                    <button className='button'>Price</button>
+                    {/* <button className='button'>Price</button> */}
+                <div>
+                    <input type="range" min="10" max="80" step='10' id="range" className='button' onChange ={(event) => setPriceCost(event.target.value)} />
+                    <output for="range" id="output">{priceCost}</output>
+                </div>
+
 
                     <select className='button' onChange ={(event) => 
                         // console.log(event.target.value)}
                         setNbBed(event.target.value)}
                         >
-                        <option disabled >bedroom</option>
+                        <option disabled value='bedroom'>bedroom</option>
                         <option value='1' >1</option>
                         <option value='2' >2</option>
                         <option value='3' >3</option>
