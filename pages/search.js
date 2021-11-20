@@ -13,7 +13,7 @@ const Search = () => {
           id: 2,
           title: 'The Blue Room In London',
           description: '2 guest with 1 bedroom and 1 bed with shared bathrooms and Wifi and Washing Machine',
-          type: 'room',
+          type: 'Room',
           bedroom: 1,
           img: 'https://links.papareact.com/pro',
           price: 65,
@@ -77,7 +77,7 @@ const Search = () => {
           id: 6,
           title: 'London Studio Apartments',
           description: '4 guest with 4 bedroom with 4 bed with 2 bathrooms with Free parking with Washing Machine',
-          type: 'studio',
+          type: 'Studio',
           bedroom: 4,
           img: 'https://links.papareact.com/uz7',
           price: 35,
@@ -383,7 +383,7 @@ function changeFilters(key, value){
 function filterStuff(){
     setRess(searchResult.filter(function(item) {
  for (var key in filter) {
-   if (item[key] === undefined || item[key] != filter[key])
+   if (item[key] === undefined || item[key].toLowerCase() != filter[key])
      return false;
  }
  return true;
