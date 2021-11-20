@@ -367,13 +367,19 @@ function changeFilters(key, value){
   newFilter[key]= value
   setFilter(newFilter);
  
+  //Si ton user enleve un filtre on le degage de l'objet (il faut assigner à tes input une valeur par defaut de 'none' pour les string ou '-1' pour les number)
+  if(value === 'none' || value === -1){
+    let newFilter = filter;
+    delete newFilter[key];
+    setFilter(newFilter)
+  }
 //COMMENTAIRE DE CHARLENE
 //Puis on appelle filterStuff pour filtrer les Infocard à afficher en fonction des nouveaux filtres
  filterStuff();
 }
 
 //COMMENTAIRE DE CHARLENE
-//La fonction qui filtre. Truc cool si ton user décide d'enlever des filtres suffit de mettre une valeur undefined dans tes inputs.
+//La fonction qui filtre. 
 function filterStuff(){
     setRess(searchResult.filter(function(item) {
  for (var key in filter) {
@@ -407,7 +413,7 @@ return (
                      {changeFilters("type", event.target.value)
                      }}
                      >
-                     <option value={undefined} >Type of accomodation</option>
+                     <option value='none' >Type of accomodation</option>
                      <option value='room' >Room</option>
                      <option value='studio' >Studio</option>
                      
@@ -430,7 +436,7 @@ return (
                      }
                  }
                      >
-                     <option value={undefined}>Number of bedrooms</option>
+                     <option value='-1'>Number of bedrooms</option>
                      <option value='1' >1</option>
                      <option value='2' >2</option>
                      <option value='3' >3</option>
